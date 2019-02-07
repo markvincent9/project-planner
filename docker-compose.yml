@@ -1,0 +1,28 @@
+version: '3'
+services:
+  api:
+    container_name: 'project-planner'
+    build: '.'
+    image: 'project-planner:1.0.0'
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - project-planner-network
+
+  db:
+    container_name: 'postgres'
+    image: 'postgres:11-alpine'
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=project_planner
+    networks:
+      - project-planner-network
+
+networks:
+  project-planner-network:
+    driver: bridge

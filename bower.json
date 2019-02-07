@@ -1,0 +1,26 @@
+{
+  "name": "project-planner",
+  "authors": [
+    "Mark Osea <markvincentosea@yahoo.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "src/main/resources/static/bower_components",
+    "test",
+    "tests"
+  ],
+  "directory": "src/main/resources/static",
+  "dependencies": {
+    "angular": "angularjs#^1.7.7",
+    "bootstrap": "4.0",
+    "angular-resource": "^1.7.7",
+    "angular-route": "^1.7.7",
+    "angular-ui-router": "^1.0.20"
+  }
+}
