@@ -30,9 +30,9 @@ If a task depends on some other task. It can only be started after dependency hs
 
 #### ERD
 
-<p align="center">
+<p align="left">
   <img src="https://i.imgur.com/xD1yign.png"
-      title="Project Planner ERD" width="654" height="450">
+      title="Project Planner ERD" width="600" height="350">
 <p>
 
 ##### Task Statuses
