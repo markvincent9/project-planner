@@ -1,6 +1,8 @@
 # Project Planner
 
-SpringBoot application for Generating schedule for a Project
+Project Planner is a Spring Boot Application for schuduling task for a Project.
+A Project can have one or more task and a Task can have zero or more dependencies(task).
+If a task depends on some other task. It can only be started after dependency hsa been completed 
 
 #### Tech Stack
 
@@ -18,22 +20,34 @@ SpringBoot application for Generating schedule for a Project
 
     https://docs.docker.com/compose/install/
     
-3. Install Maven
-
-    https://maven.apache.org/install.html
-    
 #### How to run
 
 1. Go Project Directory
 
-2. Build the JAR File
-    
-    Run: `mvn package`
-    
-3. Build and Start the containers
+2. Build and Start the containers
 
     Run: `docker-compose up`
-    
+
+#### ERD
+
+<img src="https://i.imgur.com/xD1yign.png" align="right"
+     title="Project Planner ERD" width="120" height="178">
+     
+##### Task Statuses
+
+OPEN        - Task is newly created
+INPROGRESS  - Task has been started
+COMPLETE    - Task has been completed
+
+#### How it works
+
+1. Project and Task can be created via REST api.
+
+2. A Scheduler Service automatically start open task if current date is >= Start Date of task
+and automatically completes task if currend date >= End Date of task.
+
+3. Task with dependencies will start after all of its subtask have status = COMPLETE
+
 #### Endpoints
 
 1. List all Projects
@@ -47,12 +61,21 @@ SpringBoot application for Generating schedule for a Project
       {
         "id": 1,
         "name": "First Project",
-        "tasks": [{
+        "tasks": [
+          {
             "name": "Dependent Task 1",
             "startAt": "2019-02-05T09:52:32.704+0000",
             "endAt": "2019-02-06T09:52:32.704+0000",
             "status": "COMPLETE",
-            "dependentTasks": []
+            "dependentTasks": [
+                {
+                  "name": "Dependent Task 1",
+                  "startAt": "2019-02-05T09:52:32.704+0000",
+                  "endAt": "2019-02-06T09:52:32.704+0000",
+                  "status": "COMPLETE",
+                  "dependentTasks": []
+                }
+            ]
           },
           {
             "name": "Dependent Task 2",
@@ -70,6 +93,7 @@ SpringBoot application for Generating schedule for a Project
       }
     ]
     ```
+
 2. Create new Project
 
     `POST http://localhost:8080/projects`
@@ -79,7 +103,21 @@ SpringBoot application for Generating schedule for a Project
     ```json
     {
       "name": "First Project",
-      "tasks": []
+      "tasks": [
+        {
+          "name": "Dependent Task 1",
+          "startAt": "2019-02-05T09:52:32.704+0000",
+          "endAt": "2019-02-06T09:52:32.704+0000",
+          "dependentTasks": [
+              {
+                "name": "Dependent Task 1",
+                "startAt": "2019-02-05T09:52:32.704+0000",
+                "endAt": "2019-02-06T09:52:32.704+0000",
+                "dependentTasks": []
+              }
+          ]
+        }
+      ]
     }
     ```
     
@@ -89,7 +127,25 @@ SpringBoot application for Generating schedule for a Project
     {
       "id": 1,
       "name": "First Project",
-      "tasks": []
+      "tasks": [
+        {
+          "id": 1,
+          "name": "Task 1",
+          "startAt": "2019-02-09T09:52:32.704+0000",
+          "endAt": "2019-02-10T09:52:32.704+0000",
+          "status": "COMPLETE",
+          "dependentTasks": [
+              {
+                "id": 2,
+                "name": "Dependent Task 1",
+                "startAt": "2019-02-05T09:52:32.704+0000",
+                "endAt": "2019-02-06T09:52:32.704+0000",
+                "status": "COMPLETE",
+                "dependentTasks": []
+              }
+          ]
+        }
+      ]
     }
     ```
     
@@ -98,4 +154,19 @@ SpringBoot application for Generating schedule for a Project
     `POST http://localhost:8080/tasks?projectId={projectId}`
     
     ##### Sample Request:
-        
+
+    ```json
+    {
+      "name": "New Task",
+      "startAt": "2019-02-06T09:52:32.704+0000",
+      "endAt": "2019-02-07T09:52:32.704+0000",
+      "dependentTasks": [
+          {
+            "name": "Dependent Task",
+            "startAt": "2019-02-05T09:52:32.704+0000",
+            "endAt": "2019-02-06T09:52:32.704+0000",
+            "dependentTasks": []
+          }
+      ]
+    }
+    ```
