@@ -37,9 +37,9 @@ If a task depends on some other task. It can only be started after dependency hs
 
 ##### Task Statuses
 
-OPEN        - Task is newly created
-INPROGRESS  - Task has been started
-COMPLETE    - Task has been completed
+* OPEN        - Task is newly created
+* INPROGRESS  - Task has been started
+* COMPLETE    - Task has been completed
 
 #### How it works
 
