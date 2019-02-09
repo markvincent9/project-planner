@@ -30,9 +30,11 @@ If a task depends on some other task. It can only be started after dependency hs
 
 #### ERD
 
-<img src="https://i.imgur.com/xD1yign.png" align="right"
-     title="Project Planner ERD" width="120" height="178">
-     
+<p align="center">
+  <img src="https://i.imgur.com/xD1yign.png"
+      title="Project Planner ERD" width="654" height="450">
+<p>
+
 ##### Task Statuses
 
 OPEN        - Task is newly created
