@@ -56,7 +56,7 @@ and automatically completes task if currend date >= End Date of task.
 
     `GET http://localhost:8080/projects`
     
-    ##### Sample Request:
+    ##### Sample Response:
     
     ```json
     [
@@ -98,10 +98,17 @@ and automatically completes task if currend date >= End Date of task.
 
 2. Create new Project
 
+    
     `POST http://localhost:8080/projects`
     
     ##### Sample Request:
     
+    ###### Headers:
+
+    * Content-Type: `application/json`
+
+    ###### Request Body:
+
     ```json
     {
       "name": "First Project",
@@ -155,6 +162,10 @@ and automatically completes task if currend date >= End Date of task.
 
     `POST http://localhost:8080/tasks?projectId={projectId}`
     
+    ###### Headers
+
+    * Content-Type `application/json`
+
     ##### Sample Request:
 
     ```json
@@ -172,3 +183,12 @@ and automatically completes task if currend date >= End Date of task.
       ]
     }
     ```
+
+#### How to test
+
+1. Go to Projec Directory > src/test/curl.
+2. Run `chmod a+rx create-new-project.sh get-projects.sh`
+3. Execute curl script.
+  * Create New project `./create-new-project.sh`
+  * Get Created PRoject `./get-projects.sh`
+  
