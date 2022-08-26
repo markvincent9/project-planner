@@ -4,7 +4,7 @@ COPY . /usr/app/
 WORKDIR /usr/app
 RUN mvn package -Dmaven.test.skip=true
 
-FROM java:8-jdk-alpine
+FROM openjdk:11
 ENV JARFILE project-planner-0.0.1-SNAPSHOT.jar
 COPY --from=build /usr/app/target/${JARFILE} /usr/app/
 WORKDIR /usr/app

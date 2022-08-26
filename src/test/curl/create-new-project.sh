@@ -4,7 +4,7 @@ curl -X POST \
   http://localhost:8080/projects \
   -H 'Content-Type: application/json' \
   -d '{
-      "name": "New Project new new",
+      "name": "New Project new 2",
       "tasks": [
         {
           "name": "Task 1",
